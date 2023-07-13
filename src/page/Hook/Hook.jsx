@@ -1,11 +1,17 @@
 import SetHook from './SetHook';
+import HookStatus from './HookStatus';
+import Header from '../../component/Header';
 import { Routes, Route } from 'react-router-dom';
 
 const Hook = () => {
   return (
-    <Routes>
-      <Route path="/setHook" element={<SetHook />} />
-    </Routes>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/setHook" element={<SetHook />} />
+        <Route path="/hookStatus" element={<HookStatus />} />
+      </Routes>
+    </>
   );
 };
 
