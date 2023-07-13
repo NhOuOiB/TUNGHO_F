@@ -76,7 +76,7 @@ const SetHook = () => {
     storageStopArr.sort((a, b) => {
       return parseInt(a.slice(1, 4)) - parseInt(b.slice(1, 4));
     });
-    console.log(product);
+
     await axios.put(`${API_URL}/updateLS`, {
       unit: unit,
       group: group,
@@ -175,8 +175,7 @@ const SetHook = () => {
       
     })();
   }, [group.groupNo, edit]);
-  console.log(product);
-  // console.log(productData);
+
   return (
     <div className="px-5 py-10">
       <div className="flex">
