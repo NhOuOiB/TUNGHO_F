@@ -1,13 +1,15 @@
 import './App.css';
 import Hook from './page/Hook/Hook';
 import Lift from './page/Lift/Lift';
-import Storage from './page/Storage/Storage';
 import Login from './page/Login/Login';
+import Storage from './page/Storage/Storage';
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <>
+      <ToastContainer />
       <BrowserRouter initialEntries={['/']} initialIndex={0} basename="">
         <Routes>
           <Route path="/" element={<Login />}></Route>
