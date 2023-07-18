@@ -67,19 +67,16 @@ const HookStatus = () => {
               {hooks.map((v, i) => {
                 return (
                   <div key={i}>
-                    {hooks[i].ProductName == hooks[i + 1]?.ProductName ? (
-                      ''
-                    ) : (
-                      <div className="h-10 rounded flex justify-between items-center px-10 font-bold">
-                        {v.ProductName}
-                      </div>
-                    )}
-                    {hooks[i].ProductName != hooks[i - 1]?.ProductName && v.ProductName == null ? (
+                    {(i == 0 || v.ProductName != hooks[i - 1]?.ProductName) &&
+                      v.ProductName != null && (
+                        <div className="h-10 rounded flex justify-between items-center px-10 font-bold">
+                          {v.ProductName}
+                        </div>
+                      )}
+                    {hooks[i].ProductName != hooks[i - 1]?.ProductName && v.ProductName == null && (
                       <div className="h-10 rounded flex justify-between items-center px-10 font-bold">
                         未勾取
                       </div>
-                    ) : (
-                      ''
                     )}
                     <div
                       className=" h-10 rounded flex justify-center items-center px-10 hover:bg-amber-200 hover:shadow"
@@ -133,7 +130,9 @@ const HookStatus = () => {
                 })}
               </div>
               <div
-                className={`h-1/2 flex justify-center  ${hook[1].length == 0 ? 'items-center' : 'items-end'}`}
+                className={`h-1/2 flex justify-center  ${
+                  hook[1].length == 0 ? 'items-center' : 'items-end'
+                }`}
               >
                 {hook[1].length == 0 ? (
                   <div>沒有紀錄</div>
