@@ -17,7 +17,6 @@ const Login = () => {
       let res = await axios.post(`${API_URL}/login`, login, {
         withCredentials: true,
       });
-      console.log(res);
       navigate('hook/setHook');
     } catch (err) {
       console.log(err);
