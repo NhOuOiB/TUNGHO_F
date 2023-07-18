@@ -54,9 +54,9 @@ const HookStatus = () => {
           );
         })}
       </div>
-      <div className="flex justify-center items-center gap-10">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-10 md:gap-5">
         <div
-          className={`2xl:w-1/5 xl:w-1/4 lg:w-2/5 sm:w-2/5 h-[43rem] bg-amber-100 rounded flex items-center transition  ${
+          className={`2xl:w-1/5 xl:w-1/4 lg:w-1/4 md:w-1/3 sm:w-2/5 w-full h-[43rem] bg-amber-100 rounded flex items-center transition  ${
             hooks.length == 0 ? 'opacity-0' : 'opacity-1'
           }`}
         >
@@ -97,7 +97,7 @@ const HookStatus = () => {
         </div>
 
         <div
-          className={`2xl:w-3/6 xl:w-3/4 lg:w-3/5 sm:w-3/5 h-[43rem] bg-amber-100 text-[#444] rounded flex transition duration-200 ${
+          className={`2xl:w-3/6 xl:w-3/4 lg:w-3/4 md:w-2/3 sm:w-3/5 w-full h-[43rem] bg-amber-100 text-[#444] rounded flex transition duration-200 ${
             hook.length == 0 ? 'opacity-0' : 'opacity-1'
           }`}
         >
