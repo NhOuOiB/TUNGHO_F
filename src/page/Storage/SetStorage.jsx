@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { API_URL } from '../../utils/config';
+import { toast } from 'react-toastify';
 
 const SetStorage = () => {
   const [unit, setUnit] = useState({ unit: '' });
@@ -15,25 +16,35 @@ const SetStorage = () => {
     setUnit({ unit: v.Unit });
   }
 
-async function handleStorageClick(storageNo) {
-  let storageData = await axios.get(`${API_URL}/getStorageByNo`, {
-    params: { unit: unit.unit, storageNo: storageNo },
-  });
-  setStorage(storageData.data);
-}
+  async function handleStorageClick(storageNo) {
+    let storageData = await axios.get(`${API_URL}/getStorageByNo`, {
+      params: { unit: unit.unit, storageNo: storageNo },
+    });
+    setStorage(storageData.data);
+  }
 
-async function handleChangeStatus(status) {
-  let res = await axios.put(`${API_URL}/updateStorageStatus`, {
-    unit: unit.unit,
-    storageNo: storage[0].StorageNo,
-    status: status,
-  });
-  handleStorageClick(storage[0].StorageNo);
-}
+  async function handleChangeStatus(status) {
+    let res = await axios.put(`${API_URL}/updateStorageStatus`, {
+      unit: unit.unit,
+      storageNo: storage[0].StorageNo,
+      status: status,
+    });
+    toast.success(res.data.message, {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+    handleStorageClick(storage[0].StorageNo);
+  }
 
-function handleBack() {
-  setStorage([]);
-}
+  function handleBack() {
+    setStorage([]);
+  }
 
   useEffect(() => {
     (async () => {

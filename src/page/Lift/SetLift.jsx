@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { API_URL } from '../../utils/config';
+import { toast } from 'react-toastify';
 
 const SetLift = () => {
   const [unit, setUnit] = useState({ unit: '' });
@@ -27,6 +28,16 @@ const SetLift = () => {
       unit: unit.unit,
       liftNo: lift[0].LiftNo,
       status: status,
+    });
+    toast.success(res.data.message, {
+      position: 'top-center',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
     });
     handleLiftClick(lift[0].LiftNo);
   }
