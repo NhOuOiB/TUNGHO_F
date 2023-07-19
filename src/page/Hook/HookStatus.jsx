@@ -4,17 +4,20 @@ import { useState, useEffect } from 'react';
 import { API_URL } from '../../utils/config';
 
 const HookStatus = () => {
-  const [unit, setUnit] = useState({ unit: '' });
-  const [unitData, setUnitData] = useState([]);
   const [hook, setHook] = useState([]);
   const [hooks, setHooks] = useState([]);
+  const [hookNow, setHookNow] = useState('');
+  const [unitData, setUnitData] = useState([]);
+  const [unit, setUnit] = useState({ unit: '' });
 
   async function handleUnitClick(v) {
     setUnit({ unit: v.Unit });
     setHook([]);
+    setHookNow('')
   }
 
   async function handleHookClick(hookNo) {
+    setHookNow(hookNo)
     let hook = await axios.get(`${API_URL}/getHook`, {
       params: { unit: unit.unit, hookNo: hookNo },
     });
@@ -56,35 +59,46 @@ const HookStatus = () => {
       </div>
       <div className="flex flex-col sm:flex-row justify-center items-center gap-10 md:gap-5">
         <div
-          className={`2xl:w-1/5 xl:w-1/4 lg:w-1/4 md:w-1/3 sm:w-2/5 w-full h-[43rem] bg-amber-100 rounded flex items-center transition  ${
+          className={`2xl:w-1/5 xl:w-1/4 lg:w-1/4 md:w-1/3 sm:w-2/5 w-full h-[43rem] bg-amber-100 rounded flex flex-col justify-center items-center transition  ${
             hooks.length == 0 ? 'opacity-0' : 'opacity-1'
           }`}
         >
-          {hooks.length == 0 ? (
-            ''
-          ) : (
+          <div className="w-full grid grid-cols-3   text-[#444]">
+            <div className="py-2 ml-2 border border-amber-500">料號</div>
+            <div className="py-2 mx-1 border border-amber-500">鉤號</div>
+            <div className="py-2 mr-2 border border-amber-500">是否勾料</div>
+          </div>
+          {hooks.length != 0 && (
             <div className="w-full h-[37.5rem] text-[#444] overflow-auto">
               {hooks.map((v, i) => {
                 return (
                   <div key={i}>
                     {(i == 0 || v.ProductName != hooks[i - 1]?.ProductName) &&
                       v.ProductName != null && (
-                        <div className="h-10 rounded flex justify-between items-center px-10 font-bold">
+                        <div className="w-full rounded grid grid-cols-3 py-4 font-bold">
                           {v.ProductName}
                         </div>
                       )}
                     {hooks[i].ProductName != hooks[i - 1]?.ProductName && v.ProductName == null && (
-                      <div className="h-10 rounded flex justify-between items-center px-10 font-bold">
-                        未勾取
-                      </div>
+                      <div className="rounded grid grid-cols-3 py-4 font-bold">未配對</div>
                     )}
                     <div
-                      className=" h-10 rounded flex justify-center items-center px-10 hover:bg-amber-200 hover:shadow"
-                      onDoubleClick={() => {
+                      className={`rounded grid grid-cols-3 py-2 ml-2 hover:bg-amber-200 hover:shadow ${
+                        v.HookNo === hookNow && 'bg-amber-200 hover:bg-amber-300'
+                      }`}
+                      onClick={() => {
                         handleHookClick(v.HookNo);
                       }}
                     >
-                      {v.HookNo}
+                      <div></div>
+                      <div>{v.HookNo}</div>
+                      <div className="flex justify-center items-center">
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            v.ProductFlag && 'bg-gradient-to-r from-[#000046] to-[#1cb5e0]'
+                          } `}
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 );
@@ -158,7 +172,7 @@ const HookStatus = () => {
                             <td className="w-1/12">{v.StorageNo}</td>
                             <td className="w-1/12">{v.ProductName}</td>
                             <td className="w-3/12">
-                              {moment(v.CreateTime).format('MM 月 DD 日 HH 時 mm 分 ss 秒')}
+                              {moment.utc(v.CreateTime).format('MM 月 DD 日 HH 時 mm 分 ss 秒')}
                             </td>
                           </tr>
                         );
