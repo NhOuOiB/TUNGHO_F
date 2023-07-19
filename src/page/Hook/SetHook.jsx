@@ -90,9 +90,9 @@ const SetHook = () => {
         storageStartArr: storageStartArr,
       });
       toast.success(res.data.message, {
-        position: 'top-center',
+        position: 'top-right',
         autoClose: 5000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -110,9 +110,9 @@ const SetHook = () => {
 
     if (insertGroup === '') {
       toast.error('沒有輸入群組名稱', {
-        position: 'top-center',
+        position: 'top-right',
         autoClose: 5000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -123,9 +123,9 @@ const SetHook = () => {
     }
     if (groupData.map((v) => v.GroupNo).includes(insertGroup.toUpperCase())) {
       toast.error('已經有重複的群組名稱', {
-        position: 'top-center',
+        position: 'top-right',
         autoClose: 5000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -136,9 +136,9 @@ const SetHook = () => {
     }
     if (product === '') {
       toast.error('尚未選擇產品', {
-        position: 'top-center',
+        position: 'top-right',
         autoClose: 5000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -150,9 +150,9 @@ const SetHook = () => {
 
     if (liftStartArr.length === 0 || storageStartArr.length === 0) {
       toast.error('請選擇至少各一個升降台或儲存槽', {
-        position: 'top-center',
+        position: 'top-right',
         autoClose: 5000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -168,9 +168,9 @@ const SetHook = () => {
         storageStartArr: storageStartArr,
       });
       toast.success(res.data.message, {
-        position: 'top-center',
+        position: 'top-right',
         autoClose: 5000,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
@@ -305,13 +305,13 @@ const SetHook = () => {
         storage={processArray(storage)}
       />
       <div className="px-5 py-10">
-        <div className="flex">
+        <div className={`flex  transition ${unitData.length === 0 && 'opacity-0'}`}>
           {unitData.map((v, i) => {
             return (
               <div
                 className={`w-12 py-2 mb-5 mx-3 border rounded cursor-pointer ${
                   v.Unit === unit.unit ? 'bg-white text-gray-800' : ''
-                }`}
+                } `}
                 key={i}
                 onClick={() => {
                   handleUnitClick(v);
@@ -322,13 +322,13 @@ const SetHook = () => {
             );
           })}
         </div>
-        <div className="flex">
+        <div className={`flex transition ${groupData.length === 0 && 'opacity-0'}`}>
           {groupData.map((v, i) => {
             return (
               <div
-                className={`w-12 py-2 mb-5 mx-3 border rounded cursor-pointer ${
+                className={`w-12 py-2 mb-5 mx-3 border rounded cursor-pointer  ${
                   v.GroupNo === group.groupNo ? 'bg-white text-gray-800' : ''
-                }`}
+                } `}
                 key={i}
                 onClick={() => {
                   handleGroupClick(v);
@@ -351,10 +351,8 @@ const SetHook = () => {
             ''
           )}
         </div>
-        {!unit.unit || !group.groupNo ? (
-          ''
-        ) : (
-          <div className="2xl:w-4/6 xl:w-4/6 lg:w-4/5 sm:w-4/5 h-fit bg-amber-100 rounded m-auto text-[#444] pt-10 pb-20">
+        
+          <div className={`2xl:w-4/6 xl:w-4/6 lg:w-4/5 sm:w-4/5 h-fit bg-amber-100 rounded m-auto text-[#444] pt-10 pb-20 transition ${!unit.unit || !group.groupNo ? 'opacity-0' : 'opacity-1'}`}>
             {edit ? (
               <div className="flex justify-end mx-10 mb-5">
                 <div
@@ -480,7 +478,6 @@ const SetHook = () => {
               )}
             </div>
           </div>
-        )}
       </div>
     </>
   );

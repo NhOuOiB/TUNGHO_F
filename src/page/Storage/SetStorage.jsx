@@ -30,9 +30,9 @@ const SetStorage = () => {
       status: status,
     });
     toast.success(res.data.message, {
-      position: 'top-center',
+      position: 'top-right',
       autoClose: 5000,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -62,7 +62,7 @@ const SetStorage = () => {
   }, [unit.unit, storage]);
   return (
     <div className="px-5 py-10 mb-5">
-      <div className="flex">
+      <div className={`flex transition ${unitData.length === 0 && 'opacity-0'}`}>
         {unitData.map((v, i) => {
           return (
             <div
@@ -79,8 +79,12 @@ const SetStorage = () => {
           );
         })}
       </div>
-      {unit.unit != '' ? (
-        <div className="2xl:w-4/6 xl:w-4/6 lg:w-4/5 sm:w-4/5 h-fit bg-amber-100 rounded m-auto text-[#444] py-10">
+
+        <div
+          className={`2xl:w-4/6 xl:w-4/6 lg:w-4/5 sm:w-4/5 h-fit bg-amber-100 rounded m-auto text-[#444] py-10 transition ${
+            !unit.unit && 'opacity-0'
+          }`}
+        >
           <div className="p-5">
             {storageData.length == 0 ? (
               <div>該群組無儲存槽</div>
@@ -152,9 +156,6 @@ const SetStorage = () => {
             )}
           </div>
         </div>
-      ) : (
-        ''
-      )}
     </div>
   );
 };

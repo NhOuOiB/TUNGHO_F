@@ -30,9 +30,9 @@ const SetLift = () => {
       status: status,
     });
     toast.success(res.data.message, {
-      position: 'top-center',
+      position: 'top-right',
       autoClose: 5000,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -63,7 +63,7 @@ const SetLift = () => {
 
   return (
     <div className="px-5 py-10 mb-5">
-      <div className="flex">
+      <div className={`flex transition ${unitData.length === 0 && 'opacity-0'}`}>
         {unitData.map((v, i) => {
           return (
             <div
@@ -80,82 +80,82 @@ const SetLift = () => {
           );
         })}
       </div>
-      {unit.unit != '' ? (
-        <div className="2xl:w-4/6 xl:w-4/6 lg:w-4/5 sm:w-4/5 h-fit bg-amber-100 rounded m-auto text-[#444] py-10">
-          <div className="p-5">
-            {liftData.length == 0 ? (
-              <div>此群組無升降機</div>
-            ) : (
-              <>
-                {lift.length == 0 ? (
-                  <div className="m-auto grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-10">
-                    {liftData.map((v, i) => {
-                      return (
-                        <div
-                          className={`w-20 h-20 rounded-full font-bold text-2xl  flex justify-center items-center m-2 ${
-                            v.Status == 1
-                              ? 'bg-green-400'
-                              : v.Status == 2
-                              ? 'bg-cyan-50 cursor-pointer'
-                              : 'bg-red-500 cursor-pointer'
-                          }`}
-                          onClick={() => {
-                            if (v.Status != 1) handleLiftClick(v.LiftNo);
-                          }}
-                          key={i}
-                        >
-                          <p className="">{v.LiftNo}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  lift.map((v, i) => {
+      <div
+        className={`2xl:w-4/6 xl:w-4/6 lg:w-4/5 sm:w-4/5 h-fit bg-amber-100 rounded m-auto text-[#444] py-10 transition ${
+          !unit.unit && 'opacity-0'
+        }`}
+      >
+        <div className="p-5">
+          {liftData.length == 0 ? (
+            <div>此群組無升降機</div>
+          ) : (
+            <>
+              {lift.length == 0 ? (
+                <div className="m-auto grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-8 xl:grid-cols-8 2xl:grid-cols-10">
+                  {liftData.map((v, i) => {
                     return (
-                      <div key={i}>
-                        <div className="text-3xl font-bold">{v.LiftNo}</div>
-                        <div className="my-10 flex justify-center items-center gap-5">
-                          <div
-                            className={`border rounded-full w-14 h-14 flex justify-center items-center ${
-                              v.Status == 3 ? 'bg-cyan-50 cursor-pointer' : 'bg-gray-400'
-                            }`}
-                            onClick={() => {
-                              if (v.Status == 3) handleChangeStatus(2);
-                            }}
-                          >
-                            ON
-                          </div>
-                          <div
-                            className={`border rounded-full w-14 h-14 flex justify-center items-center ${
-                              v.Status != 3 ? 'bg-red-500 cursor-pointer' : 'bg-gray-400'
-                            }`}
-                            onClick={() => {
-                              if (v.Status != 3) handleChangeStatus(3);
-                            }}
-                          >
-                            OFF
-                          </div>
-                        </div>
-
-                        <div className="flex justify-center items-center gap-5">
-                          <div
-                            className="border rounded px-4 py-2 bg-slate-800 text-white cursor-pointer"
-                            onClick={handleBack}
-                          >
-                            返回
-                          </div>
-                        </div>
+                      <div
+                        className={`w-20 h-20 rounded-full font-bold text-2xl  flex justify-center items-center m-2 ${
+                          v.Status == 1
+                            ? 'bg-green-400'
+                            : v.Status == 2
+                            ? 'bg-cyan-50 cursor-pointer'
+                            : 'bg-red-500 cursor-pointer'
+                        }`}
+                        onClick={() => {
+                          if (v.Status != 1) handleLiftClick(v.LiftNo);
+                        }}
+                        key={i}
+                      >
+                        <p className="">{v.LiftNo}</p>
                       </div>
                     );
-                  })
-                )}
-              </>
-            )}
-          </div>
+                  })}
+                </div>
+              ) : (
+                lift.map((v, i) => {
+                  return (
+                    <div key={i}>
+                      <div className="text-3xl font-bold">{v.LiftNo}</div>
+                      <div className="my-10 flex justify-center items-center gap-5">
+                        <div
+                          className={`border rounded-full w-14 h-14 flex justify-center items-center ${
+                            v.Status == 3 ? 'bg-cyan-50 cursor-pointer' : 'bg-gray-400'
+                          }`}
+                          onClick={() => {
+                            if (v.Status == 3) handleChangeStatus(2);
+                          }}
+                        >
+                          ON
+                        </div>
+                        <div
+                          className={`border rounded-full w-14 h-14 flex justify-center items-center ${
+                            v.Status != 3 ? 'bg-red-500 cursor-pointer' : 'bg-gray-400'
+                          }`}
+                          onClick={() => {
+                            if (v.Status != 3) handleChangeStatus(3);
+                          }}
+                        >
+                          OFF
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center items-center gap-5">
+                        <div
+                          className="border rounded px-4 py-2 bg-slate-800 text-white cursor-pointer"
+                          onClick={handleBack}
+                        >
+                          返回
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </>
+          )}
         </div>
-      ) : (
-        ''
-      )}
+      </div>
     </div>
   );
 };

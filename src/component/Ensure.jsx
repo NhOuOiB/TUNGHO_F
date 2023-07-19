@@ -24,9 +24,9 @@ const ensure = ({
       },
     });
     toast.success(res.data.message, {
-      position: 'top-center',
+      position: 'top-right',
       autoClose: 5000,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
