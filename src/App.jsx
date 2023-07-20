@@ -4,6 +4,7 @@ import Lift from './page/Lift/Lift';
 import Login from './page/Login/Login';
 import Storage from './page/Storage/Storage';
 import { ToastContainer } from 'react-toastify';
+import CopyRight from './component/CopyRight';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/storage/*" element={<Storage />}></Route>
         </Routes>
       </BrowserRouter>
+        <CopyRight />
     </>
   );
 }

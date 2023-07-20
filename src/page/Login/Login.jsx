@@ -44,7 +44,7 @@ const Login = () => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center">
+    <div className="w-full h-[calc(100%-24px)] flex flex-col justify-center items-center">
       <div>
         <div>
           <p className="text-left">帳號</p>
@@ -55,6 +55,7 @@ const Login = () => {
             name="account"
             required
             onChange={handleChange}
+            className=' bg-neutral-700'
           />
         </div>
         <div>
@@ -69,6 +70,7 @@ const Login = () => {
                 handleLogin(e);
               }
             }}
+            className=' bg-neutral-700'
           />
         </div>
         <div className="my-6 border cursor-pointer" onClick={handleLogin}>

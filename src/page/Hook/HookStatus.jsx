@@ -119,14 +119,14 @@ const HookStatus = () => {
       <div className={`transition ${!ensure && 'opacity-0'}`}>
         <Ensure
           message={`是否確定重置${unit.unit}機組?`}
-          hint={'(將天鈎全部重新分配)'}
+          hint={'(天鈎配對將全部清除)'}
           ensure={ensure}
           setEnsure={setEnsure}
           from={'hooks'}
           unit={unit.unit}
         />
       </div>
-      <div className="px-5 pt-10">
+      <div className="px-5 pt-10 w-full h-[calc(100%-72px)]">
         <div className="flex">
           {unitData.map((v, i) => {
             return (
@@ -262,7 +262,7 @@ const HookStatus = () => {
                         <div className="w-full">
                           <div className="grid grid-cols-5 text-2xl">
                             <div>群組</div>
-                            <div>勾號</div>
+                            <div>鈎號</div>
                             <div>升降機</div>
                             <div>儲存槽</div>
                             <div>材料名稱</div>
@@ -300,7 +300,7 @@ const HookStatus = () => {
                       <thead>
                         <tr>
                           <th>群組</th>
-                          <th>勾號</th>
+                          <th>鈎號</th>
                           <th>升降機</th>
                           <th>儲存槽</th>
                           <th>材料名稱</th>

@@ -63,7 +63,7 @@ const SetLift = () => {
   }, [unit.unit, lift]);
 
   return (
-    <div className="px-5 py-10 mb-5">
+    <div className="px-5 py-10 w-full h-[calc(100%-72px)]">
       <div className={`absolute right-4 top-16 flex transition ${!unit.unit && 'opacity-0'} `}>
         <div
           className={`py-4 gap-2 w-fit px-10 me-2 rounded bg-gray-500 transition ${
@@ -82,7 +82,7 @@ const SetLift = () => {
             <div className="w-2 h-2 rounded-sm bg-red-500"></div>
             <div>停用中</div>
           </div>
-          <div className='w-32 mt-5 text-sm'>只有閒置中的升降機可以停用</div>
+          <div className="w-32 mt-5 text-sm">只有閒置中的升降機可以停用</div>
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +130,7 @@ const SetLift = () => {
         }`}
       >
         <div className="p-5">
-          <div className='text-left text-5xl font-bold mb-10 ms-2'>升降機</div>
+          <div className="text-left text-5xl font-bold mb-10 ms-2">升降機</div>
           {liftData.length == 0 ? (
             <div>此群組無升降機</div>
           ) : (

@@ -62,7 +62,7 @@ const SetStorage = () => {
     })();
   }, [unit.unit, storage]);
   return (
-    <div className="px-5 py-10 mb-5">
+    <div className="px-5 py-10 w-full h-[calc(100%-72px)]">
       <div className={`absolute right-4 top-16 flex transition ${!unit.unit && 'opacity-0'} `}>
         <div
           className={`py-4 gap-2 w-fit px-10 me-2 rounded bg-gray-500 transition ${

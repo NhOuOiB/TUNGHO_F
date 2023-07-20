@@ -354,7 +354,7 @@ const SetHook = () => {
           from={'group'}
         />
       </div>
-      <div className="px-5 py-10">
+      <div className="px-5 py-10 w-full h-[calc(100%-72px)]">
         <div className={`flex  transition ${unitData.length === 0 && 'opacity-0'}`}>
           {unitData.map((v, i) => {
             return (
