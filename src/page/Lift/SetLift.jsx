@@ -4,8 +4,9 @@ import { API_URL } from '../../utils/config';
 import { toast } from 'react-toastify';
 
 const SetLift = () => {
-  const [unit, setUnit] = useState({ unit: '' });
   const [lift, setLift] = useState([]);
+  const [unit, setUnit] = useState({ unit: '' });
+  const [info, setInfo] = useState(false);
   const [liftData, setLiftData] = useState([]);
   const [unitData, setUnitData] = useState([]);
 
@@ -63,6 +64,49 @@ const SetLift = () => {
 
   return (
     <div className="px-5 py-10 mb-5">
+      <div className={`absolute right-4 top-16 flex transition ${!unit.unit && 'opacity-0'} `}>
+        <div
+          className={`py-4 gap-2 w-fit px-10 me-2 rounded bg-gray-500 transition ${
+            !info && 'opacity-0'
+          }`}
+        >
+          <div className="flex justify-center items-center gap-2">
+            <div className="w-2 h-2 rounded-sm bg-green-400"></div>
+            <div>運作中</div>
+          </div>
+          <div className="flex justify-center items-center gap-2">
+            <div className="w-2 h-2 rounded-sm bg-cyan-100"></div>
+            <div>閒置中</div>
+          </div>
+          <div className="flex justify-center items-center gap-2">
+            <div className="w-2 h-2 rounded-sm bg-red-500"></div>
+            <div>停用中</div>
+          </div>
+          <div className='w-32 mt-5 text-sm'>只有閒置中的升降機可以停用</div>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#eee"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transition ${info && 'scale-110'}`}
+          onMouseEnter={() => {
+            setInfo(true);
+          }}
+          onMouseLeave={() => {
+            setInfo(false);
+          }}
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
       <div className={`flex transition ${unitData.length === 0 && 'opacity-0'}`}>
         {unitData.map((v, i) => {
           return (
@@ -86,6 +130,7 @@ const SetLift = () => {
         }`}
       >
         <div className="p-5">
+          <div className='text-left text-5xl font-bold mb-10 ms-2'>升降機</div>
           {liftData.length == 0 ? (
             <div>此群組無升降機</div>
           ) : (
