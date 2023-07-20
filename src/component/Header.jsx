@@ -17,7 +17,7 @@ const Header = () => {
     },
     {
       link: '/hook/hookStatus',
-      name: '天鉤',
+      name: '天鈎',
     },
   ]);
   return (
